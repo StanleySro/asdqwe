@@ -1,0 +1,80 @@
+body {
+    grid-template-rows: 343px 57px 650px 170px;
+}
+
+.contener{
+    grid-column: 0;
+    grid-row: 3;
+    margin-top: 60px;
+    
+}
+.con1{
+width: 50%;
+float: left;
+}
+.con2{
+    width: 50%;
+    float: left;
+    }
+.Label{
+
+    margin-left: 80px;
+
+}
+
+.tbox{
+    padding-right: 80px;
+    float: right;
+    margin-right: 50px;
+}
+.cbox{
+    padding-right: 152px;
+    float: right;
+    margin-right: 50px;
+}
+.Labelp{
+
+    margin-top: 90px;
+
+
+    }
+.tboxp{
+
+    padding-right: 80px;
+    float: right;
+    margin-right: 150px;
+
+
+}
+.tboxp2{
+
+    width: 380px;
+    height: 125px;
+    float: right;
+    margin-right: 150px;
+}
+.tboxp3{
+
+    width: 380px;
+    height: 125px;
+    float: right;
+}
+.tboxp4{
+
+    width: 380px;
+    height: 80px;
+    float: right;
+}
+
+.Wyslij{
+    margin-left: 310px;
+    margin-top: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.xWyslij{
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-left: 180px;
+}

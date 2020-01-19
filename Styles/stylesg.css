@@ -1,0 +1,8 @@
+.contener{
+    grid-column: 0;
+    grid-row: 3;
+    padding: 100px;
+    padding-top: 50px;
+    font: 17px  arial, sans-serif;
+    font-weight: bold;
+}

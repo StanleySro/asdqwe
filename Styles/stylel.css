@@ -1,0 +1,23 @@
+.contener{
+    grid-column: 0;
+    grid-row: 3;
+
+}
+.logowanie{
+float: left;
+margin-top: 90px;
+margin-left: 50px;
+  }
+.dompmg{
+    margin-top: 30px;
+    margin-left: 420px;
+}
+.tbox{
+    padding-right: 80px;
+    margin-left: 50px;
+}
+.zatwierdz{
+    margin-left: 243px;
+    margin-top: 35px;
+
+}

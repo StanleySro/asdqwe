@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+
+<head>
+   <meta charset="utf-8" />
+   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+   <title> Stachudom - Wynajem Mieszkan </title>
+
+   <meta name="description" content="Serwis umozliwiajacy wygodny i pewny wynajem mieszkan" />
+   <meta name="keywords" content="Stachudom, Wynajem, Mieszkania, Warszawa" />
+
+   <link rel="stylesheet" type="text/css" href="Styles/style.css" />
+
+   <link rel="stylesheet" type="text/css" href="Styles/stylez.css" />
+</head>
+
+<body>
+   <div class="header">
+      <img src="Images/stachudom.png">
+   </div>
+   <div class="navigation">
+      <nav>
+         <ul>
+            <li><a href="index.html">Strona główna</a></li>
+            <li><a href="rezerwacja.html">Rezerwacja</a></li>
+            <li><a href="logowanie.html">Logowanie</a></li>
+         </ul>
+      </nav>
+   </div>
+
+   <div class="contener">
+
+      <form action="Zalogowano.html" onsubmit="return validateForm()" id="form" novalidate>
+         <div class="con1">
+
+            <p>
+               <label class="Label">Pierwsze imię :</label>
+               <input id="imie" name="imie" class="tbox" type="text"> <span class="required"><sup></sup></span>
+               <span id="errors_imie" class="errors-text"></span>
+               </br> </br>
+
+            </p>
+
+
+
+            <p>
+               <label class="Label">Drugie imię :</label>
+               <input id="imie2" name="imie2" class="tbox" type="text"> <span class="required"><sup></sup></span>
+               <span id="errors_imie2" class="errors-text"></span>
+               </br> </br>
+
+            </p>
+
+
+
+
+
+            <p>
+               <label class="Label">Data Urodzenia :</label>
+               <input id="data" name="data" class="tbox" type="text"> <span class="required"><sup></sup></span>
+               <span id="errors_data" class="errors-text"></span>
+               </br> </br>
+
+            </p>
+
+
+
+            <p>
+               <label class="Label">PESEL :</label>
+               <input id="pesel" name="pesel" class="tbox" type="text"> <span class="required"><sup></sup></span>
+               <span id="errors_pesel" class="errors-text"></span>
+               </br> </br>
+
+            </p>
+
+
+
+
+            <label id="obywatelstwo" class="Label">Obywatelstwo :</label>
+            <select class="cbox">
+               <option>Polskie</option>
+               <option>Opcja 2</option>
+               <option>Opcja 3</option>
+            </select>
+         </br>
+      </br>
+   </br>
+
+
+
+            <input class="Wyslij" id="wyslij" type="submit" value="Wyślij">
+
+         </div>
+
+
+
+
+         <div id="errors_summary">
+
+
+         </div>
+
+
+
+      </form>
+
+
+   </div>
+   <script type="text/javascript" src="JScript/ZmodyfikujT1JS.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,19 @@
+td, th { border: 1px solid black; }
+.contener{
+	grid-row:3;
+}
+.zatwierdz{
+	float:right;
+}
+.zatwierdz1{
+	margin-left: 525px;
+}
+.zm{
+	width:100%;
+}
+.u{
+	margin-left:3px;
+}
+.usunLink{
+	text-decoration: none;
+}

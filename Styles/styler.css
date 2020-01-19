@@ -1,0 +1,71 @@
+.contener{
+    grid-row: 3;
+	display: grid; 
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: 50% 50%;
+	height: 650px;
+	grid-template-areas:  'lefttop top righttop'
+	' midleft mid midright '
+	' bottomleft bottom bottomright';
+
+}
+
+.mieszkania{
+    margin-top: 60px;
+    padding-bottom: 60px;
+    border-bottom: 4px solid #000000;
+}
+.Zdjecie1 {
+	grid-area: lefttop;
+	    margin-top: 80px;
+		margin-left: auto;
+		margin-right: auto;
+}
+.opis1{
+		grid-area: top;
+		margin-top: 80px;
+		margin-left: auto;
+		margin-right: auto;
+
+}
+.sOpis1{
+		grid-area: righttop;
+		margin-top: 60px;
+		margin-left: auto;
+		margin-right: auto;
+}
+.button1{
+	grid-area: lefttop;
+	    margin-top: 30px;
+				margin-left: 90px;
+}
+
+.kreska{
+	grid-area: 2 / 1 / span 1 / span 3;
+	    border-top: 4px solid #000000;
+}
+
+.Zdjecie2 {
+	grid-area: midleft;
+	    margin-top: 80px;
+		margin-left: auto;
+		margin-right: auto;
+}
+.opis2{
+		grid-area: mid;
+		margin-top: 80px;
+		margin-left: auto;
+		margin-right: auto;
+
+}
+.sOpis2{
+		grid-area: midright;
+		margin-top: 40px;
+		margin-left: auto;
+		margin-right: auto;
+}
+.button2{
+	grid-area: lefttop;
+	    margin-top: 30px;
+				margin-left: 90px;
+}
