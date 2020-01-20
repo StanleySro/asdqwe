@@ -27,7 +27,7 @@ app.use(cors());
 
 api.get('/user', userApi.get); // -> /api/user
 api.post('/user', userApi.post);
-api.post('/user', userApi.put);
+api.put('/user', userApi.put);
 api.delete('/user', userApi.del);
 
 api.get('/house', (req, res) => {

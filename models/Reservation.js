@@ -1,4 +1,4 @@
-const monoose = require('mongoose');
+const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
   houseId: { type: mongoose.Schema.Types.ObjectId, ref: "House", required: true },
