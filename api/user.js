@@ -1,6 +1,6 @@
 const User = require("../models/User");
 
-function post (req, res) {
+function put (req, res) {
   const { firstName, secondName, dateOfBirth, surname, pesel, reservations, nationality } = req.body;
   const newUser = new User(req.body);
   newUser.save().then(result => res.status(200).json(result)).catch(err => res.status(500).json({ error: err }));
@@ -9,12 +9,22 @@ function post (req, res) {
 function get (req, res) {
   const { id } = req.query;
   if (id) {
-    User.findById({_id : id}, (user) => {
+    User.findById({_id : id}).then((user) => {
       res.status(200).json(user);
     });
   } else {
-    User.find({}, (users) => res.status(200).json(users));
+    User.find().then((users) => res.status(200).json(users));
   }
 }
 
-module.exports = { post, get };
+function post (req, res) {
+  User.findByIdAndUpdate({ _id: req.body._id }, { ...req.body }, { new: true }).then((user) => {
+    res.status(200).json(user);
+  });
+}
+
+function del (req, res) {
+  User.findByIdAndDelete({ _id: req.query.id }).then(result => res.status(200).json(result));
+}
+
+module.exports = { put, get, post, del };

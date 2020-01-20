@@ -1,13 +1,14 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
 const userApi = require("./api/user");
 
 const app = express();
 const api = express.Router();
 
-mongoose.connect(process.env.DB_CONNECTION_STRING, {useNewUrlParser: true});
+mongoose.connect(process.env.DB_CONNECTION_STRING, {useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
@@ -16,11 +17,17 @@ db.once('open', function() {
   );
 });
 
-api.get('/user', (req, res) => {
-  const { query } = req;
-  res.status(200).send(`users ${query.id}`);
-}); // -> /api/user
+// create application/json parser
+app.use(bodyParser.json());
+// create application/x-www-form-urlencoded parser
+app.use(bodyParser.urlencoded({ extended: true }));
+
+
+api.get('/user', userApi.get); // -> /api/user
 api.post('/user', userApi.post);
+api.post('/user', userApi.put);
+api.delete('/user', userApi.del);
+
 api.get('/house', (req, res) => {
   res.status(200).send('house');
 });
