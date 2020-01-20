@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const userApi = require("./api/user");
 
@@ -21,6 +22,7 @@ db.once('open', function() {
 app.use(bodyParser.json());
 // create application/x-www-form-urlencoded parser
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
 
 
 api.get('/user', userApi.get); // -> /api/user
