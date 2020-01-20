@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const userApi = require("./api/user");
+const houseApi = require("./api/house");
+const reservationApi = require("./api/reservation");
 
 const app = express();
 const api = express.Router();
@@ -30,12 +32,15 @@ api.post('/user', userApi.post);
 api.put('/user', userApi.put);
 api.delete('/user', userApi.del);
 
-api.get('/house', (req, res) => {
-  res.status(200).send('house');
-});
-api.get('/reservations', (req, res) => {
-  res.status(200).send('reservations');
-});
+api.get('/house', houseApi.get); // -> /api/house
+api.post('/house', houseApi.post);
+api.put('/house', houseApi.put);
+api.delete('/house', houseApi.del);
+
+api.get('/reservation', reservationApi.get); // -> /api/reservation
+api.post('/reservation', reservationApi.post);
+api.put('/reservation', reservationApi.put);
+api.delete('/reservation', reservationApi.del);
 
 app.use("/api", api);
 
