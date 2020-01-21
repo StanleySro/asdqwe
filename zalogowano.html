@@ -16,7 +16,7 @@
    <link rel = "stylesheet"
    type = "text/css"
    href = "Styles/styleza.css" />
-  
+
 </head>
 
 <body>
@@ -29,38 +29,29 @@
                 <li><a href="index.html">Strona główna</a></li>
                 <li><a href="rezerwacja.html">Rezerwacja</a></li>
                 <li><a href="logowanie.html">Logowanie</a></li>
-            </ul> 
+            </ul>
         </nav>
     </div>
 
     <div class="contener">
-	
+
 		</br>
 		</br>
 		</br>
 		</br>
-		
-		
-		<table cellpadding="0" cellspacing="0" >
+
+
+		<table id="users-table" cellpadding="0" cellspacing="0" >
    <thead>
       <tr style="background-color: silver;">
          <th>Id Osoby</th> <th>Pierwsze_Imię</th> <th>Drugie_Imię</th> <th>Data_Urodzenia</th> <th>PESEL</th> <th>Obywatelstwo</th> <th>Usun</th> <th>Zmodyfikuj</th>
-      </tr> 
+      </tr>
    </thead>
    <tbody>
-      <tr>
-         <th>1</th> <td>Stanisław</td> <td>Marcin</td> <td>14.04.1998</td> <td>123456789</td> <td>1</td> <td>	<button class="u" id="usunButton"><a class="usunLink" href="Zalogowano.html">-</button>	</td> <td><button id="zmodyfikujButton" onclick="window.location.href='ZmodyfikujT1.html'"  class="zm">?</button></td>
-      </tr>
-      <tr>
-         <th>2</th> <td>Łukasz</td> <td>Woźnicki</td> <td>24.10.1998</td> <td>987654321</td> <td>2</td> <td>	<button class="u" id="usunButton1"><a class="usunLink" href="Zalogowano.html">-</button>	</td> <td><button id="zmodyfikujButton2" onclick="window.location.href='ZmodyfikujT1.html'" class="zm">?</button></td>
-      </tr>
-      <tr>
-         <th>3</th> <td>Kuba</td> <td>Kot</td> <td>18.09.2000</td> <td>111222333</td> <td>1</td> <td>	<button class="u" id="usunButton2"><a class="usunLink" href="Zalogowano.html">-</button>	</td> <td><button id="zmodyfikujButton3" onclick="window.location.href='ZmodyfikujT1.html'" class="zm">?</button></td>
-      </tr> 
    </tbody>
 </table>
 				<div class="zatwierdz1">
-                            <button id="dNR" onclick="window.location.href='dodajNowyRekordT1.html'"  >Dodaj Nowy Rekord</button> 
+                            <button id="dNR" onclick="window.location.href='dodajNowyRekordT1.html'"  >Dodaj Nowy Rekord</button>
                     </div>
 
 
@@ -69,11 +60,11 @@
 </br>
 </br>
 
-		<table cellpadding="0" cellspacing="0">
+		<table id="houses-table" cellpadding="0" cellspacing="0">
    <thead>
       <tr style="background-color: silver;">
          <th>Mieszkania_Id</th> <th>Ilosc_Lazienek</th> <th>Ilosc_sypialni</th>  <th>Ilosc_pokoi</th> <th>Pietro</th> <th>Data_wlaczenia_mieszkania_do_oferty</th> <th>Opis_mieszkania</th> <th>Usun</th> <th>Zmodyfikuj</th>
-      </tr> 
+      </tr>
    </thead>
    <tbody>
       <tr>
@@ -86,18 +77,18 @@
 </table>
 
 <div class="zatwierdz">
-                            <button id="zBM3" onclick="window.location.href='dodajNowyRekordT2.html'" type="button">Dodaj Nowy Rekord</button> 
+                            <button id="zBM3" onclick="window.location.href='dodajNowyRekordT2.html'" type="button">Dodaj Nowy Rekord</button>
                     </div>
 </br>
 </br>
 </br>
 </br>
 
-		<table style="font-size: 13.2px" cellpadding="0" cellspacing="0" style="table-layout: fixed; width: 100%">
+		<table id="reservations-table" style="font-size: 13.2px" cellpadding="0" cellspacing="0" style="table-layout: fixed; width: 100%">
    <thead>
       <tr style="background-color: silver;" >
          <th>Rezerwacja_Id</th> <th>Mieszkanie_Mieszkanie_Id</th> <th>Osoba_Wynajmujaca</th>  <th>Poczatek_Rezerwacji</th> <th>Koniec_Rezerwacji</th> <th>Szczegoly_Rezerwacji</th> <th>Data_Zameldowania</th> <th>Data_Wymeldowania</th> <th>Usun</th> <th>Zmodyfikuj</th>
-      </tr> 
+      </tr>
    </thead>
    <tbody>
       <tr>
@@ -110,13 +101,12 @@
 </table>
 
 <div class="zatwierdz">
-                            <button id="zMO3" onclick="window.location.href='dodajNowyRekordT3.html'" type="button">Dodaj Nowy Rekord</button> 
+                            <button id="zMO3" onclick="window.location.href='dodajNowyRekordT3.html'" type="button">Dodaj Nowy Rekord</button>
                     </div>
-            
-        </div>
-         
 
-       <script type="text/javascript" src="JScript/Usun.js"></script>
-		 
+        </div>
+
+       <script type="text/javascript" src="JScript/zalogowano.js"></script>
+
 </body>
 </html>
