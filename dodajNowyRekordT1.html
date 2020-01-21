@@ -31,7 +31,7 @@
 
    <div class="contener">
 
-      <form action="Zalogowano.html" onsubmit="return validateForm()" id="form" novalidate>
+      <form action="Zalogowano.html" onsubmit="return submitData(event)" id="form" novalidate>
          <div class="con1">
 
             <p>
@@ -77,8 +77,8 @@
 
 
 
-            <label id="obywatelstwo" class="Label">Obywatelstwo :</label>
-            <select class="cbox">
+            <label class="Label">Obywatelstwo :</label>
+            <select class="cbox" id="obywatelstwo"  onchange="return handleNationalityChange(event)">
                <option>Polskie</option>
                <option>Opcja 2</option>
                <option>Opcja 3</option>

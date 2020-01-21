@@ -17,25 +17,29 @@ const errorsPesel = document.getElementById('errors_pesel')
 
 const errorsSummary = document.getElementById('errors_summary')
 
+const nationality = document.getElementById('obywatelstwo').value;
 
-fetch('http://localhost:5000/api/user', { method: 'get' })
-  .then(
-    function(response) {
-      if (response.status !== 200) {
-        console.log('Looks like there was a problem. Status Code: ' +
-          response.status);
-        return;
-      }
+function submitData(e) {
+  e.preventDefault();
+  validateForm();
 
-      // Examine the text in the response
-      response.json().then(function(data) {
-        console.log(data);
-      });
+  const body = {
+    firstName: fieldFirstName.value,
+    secondName: fieldSecondName.value,
+    dateOfBirth: fieldData.value,
+    pesel: fieldPesel.value,
+    nationality,
+  }
+
+  fetch(`http://localhost:5000/api/user`, {
+    method: 'PUT',
+    body: JSON.stringify(body),
+    headers : {
+      'Content-Type': 'application/json'
     }
-  )
-  .catch(function(err) {
-    console.log('Fetch Error :-S', err);
-  });
+  })
+  .then(res => alert(`Pomyslnie utworzono urzytkownika`));
+}
 
 
 var errorMessages = {
@@ -139,14 +143,6 @@ function validateForm() {
 if (messages.length > 0) {
     valid = false;
     errorsSummary.innerHTML = messages.join('\n');
-} else {
-
-}
-if(valid)
-{
-    alert("Wysłano !");
- //   window.open("zalogowano.html");
-
 }
 
 return valid;

@@ -1,3 +1,35 @@
+function deleteUser(btn) {
+  const { user_id } = btn.dataset;
+  fetch(`http://localhost:5000/api/user?id=${user_id}`, { method: 'DELETE' })
+  .then(res => window.location.reload());
+}
+
+function modifyUser(btn) {
+  const { user_id, index } = btn.dataset;
+
+  const table = document.getElementById("users-table");
+  // const { innerHTML } = table.childNodes[1].rows.item(index + 1).cells[0];
+
+  const { length } = table.childNodes[1].rows.item(index + 1).cells;
+  const body = {};
+
+  for(let i = 0; i < length - 2; i++) {
+    const { innerHTML, childNodes } = table.childNodes[1].rows.item(index + 1).cells[i];
+    const value = childNodes[0].value;
+    const key = getInputKey(innerHTML);
+    body[key] = value;
+  }
+
+  fetch(`http://localhost:5000/api/user?id=${user_id}`, {
+    method: 'POST',
+    body: JSON.stringify(body),
+    headers : {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(res => window.location.reload());
+}
+
 class TableData {
   constructor(endpoint, keys) {
     this.endpoint = endpoint;

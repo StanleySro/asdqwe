@@ -25,6 +25,29 @@ const errorsOP = document.getElementById('errors_OP')
 const errorsSummary = document.getElementById('errors_summary')
 
 
+function submitData(e) {
+  e.preventDefault();
+  validateForm();
+
+  // const body = {
+  //   nOfBathrooms: Number,
+  //   nOfBedrooms: Number,
+  //   nOfRooms: Number,
+  //   floor: Number,
+  //   dateOfRegistration: String,
+  //   description: String
+  // }
+  const body = {}
+
+  fetch(`http://localhost:5000/api/house`, {
+    method: 'PUT',
+    body: JSON.stringify(body),
+    headers : {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(res => alert(`Pomyslnie utworzono urzytkownika`));
+}
 
 
 
@@ -37,7 +60,7 @@ var errorMessages = {
     OP: "</br>Opis nie moze byc dluzszy niz 500 znakow oraz zawierać znaków specjalnychv",
 
     data1: "</br>Data włączania mieszkania do oferty musi być wcześniejsza lub równa akutalnej dacie</br>",
-    
+
 }
 
 
@@ -108,7 +131,7 @@ function validateForm() {
 
     var dataUrodzeniaValue = fieldData.value;
     var dataSeperateValues = dataUrodzeniaValue.split("/");
-    
+
     var day = dataSeperateValues[0];
     var month = dataSeperateValues[1];
     var year = dataSeperateValues[2];
@@ -128,31 +151,10 @@ function validateForm() {
 
 
 
-    
+
 if (messages.length > 0) {
     valid = false;
     errorsSummary.innerHTML = messages.join('\n');
-} 
-
-if(valid)
-{
-    alert("Wysłano !");
- //   window.open("zalogowano.html");
-    
-
+  }
+  return valid;
 }
-
-return valid;
-}
-
-
-
-
-
-
-
-
-
-
-
-
