@@ -78,8 +78,6 @@ function insertUserData(users) {
       nationality
     } = user;
 
-    console.log(user)
-
     const idCell = row.insertCell(0);
     var firstNameCell = row.insertCell(1);
     var secondNameCell = row.insertCell(2);
@@ -91,11 +89,11 @@ function insertUserData(users) {
     const modifyBtnCell = row.insertCell(7);
 
     const input = (key, value, disabled=false) => {
-      return `<input data-key="${key}" type="string" value="${value}" ${disabled ? 'disabled="true"' : ""}"></input>`;
+      return `<input data-key="${key}" type="text" value="${value}" ${disabled ? 'disabled="true"' : ""}></input>`;
     }
 
     // Add some text to the new cells:
-    idCell.innerHTML = input(_id, _id, true);
+    idCell.innerHTML = input("_id", _id, true);
     firstNameCell.innerHTML = input("firstName", firstName);
     secondNameCell.innerHTML = input("secondName", secondName);
     dateOfBirthCell.innerHTML = input("dateOfBirth", dateOfBirth);
@@ -107,13 +105,8 @@ function insertUserData(users) {
   });
 }
 
-function getInputValue(html) {
-  const re = /(value=")[\d\w]*"/g;
-  return html.match(re)[0].split("\"")[1];
-}
-
 function getInputKey(html) {
-  const re = /(data-key=")[\d\w]*"/g;
+  const re = /(data-key=").*"/g;
   return html.match(re)[0].split("\"")[1];
 }
 
@@ -121,23 +114,56 @@ function modifyUser(btn) {
   const { user_id, index } = btn.dataset;
 
   const table = document.getElementById("users-table");
-  const { innerHTML } = table.childNodes[1].rows.item(index + 1).cells[0];
-  const value = getInputValue(innerHTML);
-  const key = getInputKey(innerHTML);
+  // const { innerHTML } = table.childNodes[1].rows.item(index + 1).cells[0];
 
-  console.log(value);
-  console.log(key)
+  const { length } = table.childNodes[1].rows.item(index + 1).cells;
+  const body = {};
 
-  // fetch(`http://localhost:5000/api/user?id=${user_id}`, { method: 'post' }, body: JSON.stringify({
+  for(let i = 0; i < length - 2; i++) {
+    const { innerHTML, childNodes } = table.childNodes[1].rows.item(index + 1).cells[i];
+    const value = childNodes[0].value;
+    const key = getInputKey(innerHTML);
+    body[key] = value;
+  }
+
+  fetch(`http://localhost:5000/api/user?id=${user_id}`, {
+    method: 'POST',
+    body: JSON.stringify(body),
+    headers : {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(res => window.location.reload());
+
+}
+
+function addUser() {
+
+  const table = document.getElementById("users-table");
+  console.log(table.childNodes[1].rows.item);
+  // const body = {};
   //
-  // }))
+  // for(let i = 0; i < length - 2; i++) {
+  //   const { innerHTML, childNodes } = table.childNodes[1].rows.item(index + 1).cells[i];
+  //   const value = childNodes[0].value;
+  //   const key = getInputKey(innerHTML);
+  //   body[key] = value;
+  // }
+  //
+  // fetch(`http://localhost:5000/api/user?id=${user_id}`, {
+  //   method: 'POST',
+  //   body: JSON.stringify(body),
+  //   headers : {
+  //     'Content-Type': 'application/json'
+  //   }
+  // })
   // .then(res => window.location.reload());
 
 }
 
 function deleteUser(btn) {
   const { user_id } = btn.dataset;
-  fetch(`http://localhost:5000/api/user?id=${user_id}`, { method: 'delete' })
+  fetch(`http://localhost:5000/api/user?id=${user_id}`, { method: 'DELETE' })
   .then(res => window.location.reload());
 }
 
