@@ -11,10 +11,55 @@ const errorspR = document.getElementById('errors_pR')
 const fieldkR = document.getElementById('kR')
 const errorskR = document.getElementById('errors_kR')
 
+function getQueryVariable(variable) {
+    var query = window.location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split('=');
+        if (decodeURIComponent(pair[0]) == variable) {
+            return decodeURIComponent(pair[1]);
+        }
+    }
+    console.log('Query variable %s not found', variable);
+}
 
 
+function submitData(e) {
+  e.preventDefault();
+  if (validateForm()) {
+    fetch(`http://localhost:5000/api/user?pesel=${fieldPesel.value}`)
+    .then(res => res.json())
+    .then(user => {
+      const { _id } = user;
+      const houseId = getQueryVariable('houseId');
+      const body = {
+        houseId,
+        rentingPersonId: _id,
+        reservationStart: fieldpR.value,
+        reservationEnd: fieldkR.value
+      };
 
+      fetch(`http://localhost:5000/api/reservation`, {
+        method: 'PUT',
+        body: JSON.stringify(body),
+        headers : {
+          'Content-Type': 'application/json'
+        }
+      })
+      .catch(err => alert(`Nie udalo sie utworzyc rezerwacji`))
+      .then(res => res.json())
+      .then(res => {
+        if (res.error) {
+          alert(`Nie udalo sie utworzyc rezerwacji`)
+        } else {
+          alert(`Pomyslnie utworzono rezerwacje`)
+        }
+      })
+    })
+    .catch(err => alert(err));
+  }
 
+}
 
 
 var errorMessages = {
@@ -35,7 +80,6 @@ function validateForm() {
     let valid = true;
 
 
-    
 
     const regPesel = /[1-9]{9}/;
     if (!regPesel.test(fieldPesel.value.trim())) {
@@ -68,7 +112,7 @@ function validateForm() {
     }
 
 
-   
+
     var dayNow = dataNow.getDate();
     var monthNow = dataNow.getMonth();
     var yearNow = dataNow.getFullYear();
@@ -77,7 +121,7 @@ function validateForm() {
 
     var datapR = fieldpR.value;
     var dataSeperateValues1 = datapR.split("/");
-    
+
     var day1 = dataSeperateValues1[0];
     var month1 = dataSeperateValues1[1];
     var year1 = dataSeperateValues1[2];
@@ -95,7 +139,7 @@ function validateForm() {
 
     var datakR = fieldkR.value;
     var dataSeperateValues2 = datakR.split("/");
-    
+
     var day2 = dataSeperateValues2[0];
     var month2 = dataSeperateValues2[1];
     var year2 = dataSeperateValues2[2];
@@ -119,7 +163,7 @@ function validateForm() {
         messages.push(errorMessages['pkR']);
         errorskR.innerHTML = errorMessages['pkR']
         errorspR.innerHTML = errorMessages['pkR']
-        
+
 
     }
 
@@ -132,30 +176,30 @@ function validateForm() {
         messages.push(errorMessages['pkR']);
         errorskR.innerHTML = errorMessages['pkR']
         errorspR.innerHTML = errorMessages['pkR']
-        
+
 
     }
 
 
 
-    if ((fieldPesel.value=='123456789')||(fieldPesel.value=='987654321')||(fieldPesel.value=='111222333')) {
-        document.getElementById("pesel").style.backgroundColor = 'white';
-        errorsPesel.innerHTML = "";
-    } else {
-        messages.push(errorMessages['pesel1']);
-        errorsPesel.innerHTML = errorMessages['pesel1'];
-        document.getElementById("pesel").style.backgroundColor = 'red';
-    }
+    // if ((fieldPesel.value=='123456789')||(fieldPesel.value=='987654321')||(fieldPesel.value=='111222333')) {
+    //     document.getElementById("pesel").style.backgroundColor = 'white';
+    //     errorsPesel.innerHTML = "";
+    // } else {
+    //     messages.push(errorMessages['pesel1']);
+    //     errorsPesel.innerHTML = errorMessages['pesel1'];
+    //     document.getElementById("pesel").style.backgroundColor = 'red';
+    // }
 
 
     if (messages.length > 0) {
         valid = false;
-    } 
+    }
 
     if(valid)
     {
      //   window.open("index.html");
-        
+
         alert("Wysłano !");
 
     }
@@ -163,5 +207,3 @@ function validateForm() {
 
     return valid;
 }
-
-

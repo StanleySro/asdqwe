@@ -9,7 +9,7 @@ class ReservationData {
     <div class="Zdjecie1">
       <img src="Images/m1.png">
       <div>
-      <input class="button1" value="Zarezerwuj" type="submit" onclick="window.location.href='zarezerwuj.html'">
+      <input class="button1" value="Zarezerwuj" type="submit" onclick="window.location.href='zarezerwuj.html?houseId=${house._id}'">
     </div>
     </div>
           <div class="opis1">

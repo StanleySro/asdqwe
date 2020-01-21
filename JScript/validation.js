@@ -1,51 +1,53 @@
-const form = document.getElementById('form')
 
-var dataNow = new Date();
-
-
-const fieldFirstName = document.getElementById('imie')
-const errorsFirstName = document.getElementById('errors_imie')
-
-const fieldSecondName = document.getElementById('imie2')
-const errorsSecondName = document.getElementById('errors_imie2')
-
-const fieldData = document.getElementById('data')
-const errorsData = document.getElementById('errors_data')
-
-const fieldPesel = document.getElementById('pesel')
-const errorsPesel = document.getElementById('errors_pesel')
-
-const fieldpR = document.getElementById('pR')
-const errorspR = document.getElementById('errors_pR')
-
-const fieldkR = document.getElementById('kR')
-const errorskR = document.getElementById('errors_kR')
-
-
-const errorsSummary = document.getElementById('errors_summary')
-
-
-
-
-
-var errorMessages = {
-    imie: "</br>Imie musi zawierać minimum 3 litery i nie posiadać cyfr </br>",
-    imie0: "</br>Imie nie moze byc dłuzsze niz 20 znakow</br>",
-    imie2: "</br>Drugie Imię nie może zawierać cyfr </br>",
-    data: "</br>Data Urodzenia musi być w formacie dd/mm/yyyy </br>",
-    pesel: "</br>Pesel musi składać się z samych cyfr w liczbie 9 </br>",
-    pR: "</br>Data początku rezerwacji musi być w formacie dd/mm/yyyy </br>",
-    kR: "</br>Data końca rezerwacji musi być w formacie dd/mm/yyyy </br>",
-
-    data1: "</br>Data urodzenia musi być wcześniejsza niż akutalna data</br>",
-    pR1: "</br>Data początku rezerwacji nie może zostać wykonana przed dniem dzisiejszym </br>",
-    kR1: "</br>Data końca rezerwacji nie może zostać wykonana przed dniem dzisiejszym </br>",
-    pkR: "</br>Data końca rezerwacji nie może być wcześniejsza niż data poczatku rezerwacji </br>",
-}
 
 
 
 function validateForm() {
+  const form = document.getElementById('form')
+
+  var dataNow = new Date();
+
+
+  const fieldFirstName = document.getElementById('imie')
+  const errorsFirstName = document.getElementById('errors_imie')
+
+  const fieldSecondName = document.getElementById('imie2')
+  const errorsSecondName = document.getElementById('errors_imie2')
+
+  const fieldData = document.getElementById('data')
+  const errorsData = document.getElementById('errors_data')
+
+  const fieldPesel = document.getElementById('pesel')
+  const errorsPesel = document.getElementById('errors_pesel')
+
+  const fieldpR = document.getElementById('pR')
+  const errorspR = document.getElementById('errors_pR')
+
+  const fieldkR = document.getElementById('kR')
+  const errorskR = document.getElementById('errors_kR')
+
+
+  const errorsSummary = document.getElementById('errors_summary')
+
+
+
+
+
+  var errorMessages = {
+      imie: "</br>Imie musi zawierać minimum 3 litery i nie posiadać cyfr </br>",
+      imie0: "</br>Imie nie moze byc dłuzsze niz 20 znakow</br>",
+      imie2: "</br>Drugie Imię nie może zawierać cyfr </br>",
+      data: "</br>Data Urodzenia musi być w formacie dd/mm/yyyy </br>",
+      pesel: "</br>Pesel musi składać się z samych cyfr w liczbie 9 </br>",
+      pR: "</br>Data początku rezerwacji musi być w formacie dd/mm/yyyy </br>",
+      kR: "</br>Data końca rezerwacji musi być w formacie dd/mm/yyyy </br>",
+
+      data1: "</br>Data urodzenia musi być wcześniejsza niż akutalna data</br>",
+      pR1: "</br>Data początku rezerwacji nie może zostać wykonana przed dniem dzisiejszym </br>",
+      kR1: "</br>Data końca rezerwacji nie może zostać wykonana przed dniem dzisiejszym </br>",
+      pkR: "</br>Data końca rezerwacji nie może być wcześniejsza niż data poczatku rezerwacji </br>",
+  }
+  
     let messages = [];
     let valid = true;
 
@@ -125,7 +127,7 @@ function validateForm() {
 
     var dataUrodzeniaValue = fieldData.value;
     var dataSeperateValues = dataUrodzeniaValue.split("/");
-    
+
     var day = dataSeperateValues[0];
     var month = dataSeperateValues[1];
     var year = dataSeperateValues[2];
@@ -150,7 +152,7 @@ function validateForm() {
 
     var datapR = fieldpR.value;
     var dataSeperateValues1 = datapR.split("/");
-    
+
     var day1 = dataSeperateValues1[0];
     var month1 = dataSeperateValues1[1];
     var year1 = dataSeperateValues1[2];
@@ -168,7 +170,7 @@ function validateForm() {
 
     var datakR = fieldkR.value;
     var dataSeperateValues2 = datakR.split("/");
-    
+
     var day2 = dataSeperateValues2[0];
     var month2 = dataSeperateValues2[1];
     var year2 = dataSeperateValues2[2];
@@ -192,7 +194,7 @@ function validateForm() {
         messages.push(errorMessages['pkR']);
         errorskR.innerHTML = errorMessages['pkR']
         errorspR.innerHTML = errorMessages['pkR']
-        
+
 
     }
 
@@ -201,12 +203,12 @@ function validateForm() {
     if (messages.length > 0) {
         valid = false;
         errorsSummary.innerHTML = messages.join('\n');
-    } 
+    }
 
     if(valid)
     {
      //   window.open("index.html");
-        
+
         alert("Wysłano !");
 
     }
@@ -215,15 +217,3 @@ function validateForm() {
 
     return valid;
 }
-
-
-
-
-
-
-
-
-
-
-
-

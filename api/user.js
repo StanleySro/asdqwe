@@ -7,10 +7,14 @@ function put (req, res) {
 }
 
 function get (req, res) {
-  const { id } = req.query;
+  const { id, pesel } = req.query;
   if (id) {
     User.findById({_id : id}).then((user) => {
       res.status(200).json(user);
+    });
+  } else if (pesel) {
+    User.find({ pesel }).then((users) => {
+      res.status(200).json(users[0]);
     });
   } else {
     User.find().then((users) => res.status(200).json(users));

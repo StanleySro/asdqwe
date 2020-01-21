@@ -30,7 +30,7 @@
         </div>
 
         <div class="contener">
-                <form action="index.html" onsubmit="return validateForm()" id="form" novalidate>
+                <form onsubmit="return submitData(event)" id="form" novalidate>
                         <div class="con1">
 
                                 <p>
@@ -81,7 +81,7 @@
 
 
                                 <label id="obywatelstwo" class="Label">Obywatelstwo :</label>
-                                <select class="cbox">
+                                <select id="nationality" class="cbox">
                                         <option>Polskie</option>
                                         <option>Opcja 2</option>
                                         <option>Opcja 3</option>
@@ -145,7 +145,7 @@
 
 
                 </form>
-                <button onclick="window.location.href = 'stalyKlientPesel.html'">Byłem już waszym klientem</button>
+                <button onclick="return redirectToStaly(event)">Byłem już waszym klientem</button>
         </div>
 
         <div class="footer">
@@ -172,6 +172,7 @@
         </div>
 
         <script type="text/javascript" src="JScript/validation.js"></script>
+        <script type="text/javascript" src="JScript/zarezerwuj.js"></script>
 
 
 </body>
