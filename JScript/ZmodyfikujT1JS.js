@@ -21,24 +21,24 @@ const nationality = document.getElementById('obywatelstwo').value;
 
 function submitData(e) {
   e.preventDefault();
-  validateForm();
-
-  const body = {
-    firstName: fieldFirstName.value,
-    secondName: fieldSecondName.value,
-    dateOfBirth: fieldData.value,
-    pesel: fieldPesel.value,
-    nationality,
-  }
-
-  fetch(`http://localhost:5000/api/user`, {
-    method: 'PUT',
-    body: JSON.stringify(body),
-    headers : {
-      'Content-Type': 'application/json'
+  if(validateForm()) {
+    const body = {
+      firstName: fieldFirstName.value,
+      secondName: fieldSecondName.value,
+      dateOfBirth: fieldData.value,
+      pesel: fieldPesel.value,
+      nationality,
     }
-  })
-  .then(res => alert(`Pomyslnie utworzono urzytkownika`));
+
+    fetch(`http://localhost:5000/api/user`, {
+      method: 'PUT',
+      body: JSON.stringify(body),
+      headers : {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(res => alert(`Pomyslnie utworzono urzytkownika`));
+  }
 }
 
 

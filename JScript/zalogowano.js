@@ -1,26 +1,42 @@
-function deleteUser(btn) {
-  const { user_id } = btn.dataset;
-  fetch(`http://localhost:5000/api/user?id=${user_id}`, { method: 'DELETE' })
+function del(btn, endpoint) {
+  const { _id } = btn.dataset;
+  fetch(`http://localhost:5000/api/${endpoint}?id=${_id}`, { method: 'DELETE' })
   .then(res => window.location.reload());
 }
 
-function modifyUser(btn) {
-  const { user_id, index } = btn.dataset;
+function getInputKey(html) {
+  const re = /(data-key=").*"/g;
+  return html.match(re)[0].split("\"")[1];
+}
 
-  const table = document.getElementById("users-table");
-  // const { innerHTML } = table.childNodes[1].rows.item(index + 1).cells[0];
+function mod(btn, endpoint) {
+  const { _id, index } = btn.dataset;
+  const table = document.getElementById(`${endpoint}-table`);
 
-  const { length } = table.childNodes[1].rows.item(index + 1).cells;
+  const { innerHTML } = table.childNodes[1]
+  .rows
+  .item(1)
+  .cells[0];
+
+  const { length } = table.childNodes[1]
+  .rows
+  .item(Number(index) + 1)
+  .cells;
+
   const body = {};
 
   for(let i = 0; i < length - 2; i++) {
-    const { innerHTML, childNodes } = table.childNodes[1].rows.item(index + 1).cells[i];
+    const { innerHTML, childNodes } = table.childNodes[1]
+    .rows
+    .item(Number(index) + 1)
+    .cells[i];
+
     const value = childNodes[0].value;
     const key = getInputKey(innerHTML);
     body[key] = value;
   }
 
-  fetch(`http://localhost:5000/api/user?id=${user_id}`, {
+  fetch(`http://localhost:5000/api/${endpoint}?id=${_id}`, {
     method: 'POST',
     body: JSON.stringify(body),
     headers : {
@@ -53,8 +69,8 @@ class TableData {
       });
       const deleteBtnCell = row.insertCell(this.keys.length);
       const modifyBtnCell = row.insertCell(this.keys.length + 1);
-      deleteBtnCell.innerHTML = `<button class="u" id="usunButton3" data-user_id=${data[i]['_id']} data-index=${i} onclick="delete${this.endpoint.charAt(0).toUpperCase() + this.endpoint.substring(1)}(this)">-</button>`;
-      modifyBtnCell.innerHTML = `<button class="zm" id="zBM1" data-user_id=${data[i]['_id']} data-index=${i} onclick="modify${this.endpoint.charAt(0).toUpperCase() + this.endpoint.substring(1)}(this)">?</button>`;
+      deleteBtnCell.innerHTML = `<button class="u" id="usunButton3" data-_id=${data[i]['_id']} data-index=${i} onclick="del(this,'${this.endpoint}')">-</button>`;
+      modifyBtnCell.innerHTML = `<button class="zm" id="zBM1" data-_id=${data[i]['_id']} data-index=${i} onclick="mod(this,'${this.endpoint}')">?</button>`;
     });
   }
 

@@ -24,42 +24,27 @@ const errorsOP = document.getElementById('errors_OP')
 
 const errorsSummary = document.getElementById('errors_summary')
 
-console.log(fieldiL.value)
-console.log(fieldiS.value)
-console.log(fieldiP.value)
-console.log(fieldPi.value)
-console.log(fieldData.value)
-console.log(fieldOP.value)
 function submitData(e) {
   e.preventDefault();
-  validateForm();
+  if(validateForm()) {
+    const body = {
+      nOfBathrooms: fieldiL.value,
+      nOfBedrooms: fieldiS.value,
+      nOfRooms: fieldiP.value,
+      floor: fieldPi.value,
+      dateOfRegistration: fieldData.value,
+      description: fieldOP.value
+    };
 
-  // const body = {
-  //   nOfBathrooms: Number,
-  //   nOfBedrooms: Number,
-  //   nOfRooms: Number,
-  //   floor: Number,
-  //   dateOfRegistration: String,
-  //   description: String
-  // }
-
-  console.log(fieldiL.value)
-  console.log(fieldiS.value)
-  console.log(fieldiP.value)
-  console.log(fieldPi.value)
-  console.log(fieldData.value)
-  console.log(fieldOP.value)
-
-  const body = {}
-
-  fetch(`http://localhost:5000/api/house`, {
-    method: 'PUT',
-    body: JSON.stringify(body),
-    headers : {
-      'Content-Type': 'application/json'
-    }
-  })
-  .then(res => alert(`Pomyslnie utworzono urzytkownika`));
+    fetch(`http://localhost:5000/api/house`, {
+      method: 'PUT',
+      body: JSON.stringify(body),
+      headers : {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(res => alert(`Pomyslnie utworzono mieszkanie`));
+  }
 }
 
 

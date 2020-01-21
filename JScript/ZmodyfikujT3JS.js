@@ -32,8 +32,8 @@ const errorsSummary = document.getElementById('errors_summary')
 
 
 var errorMessages = {
-    mM: "</br>Id Mieszkania musi składać się z samych cyfr w zakresie 1-999 </br>",
-    oW: "</br>Id Osoby wynajmującej musi składać się z samych cyfr w zakresie 1 - x</br>",
+    mM: "</br>Id Mieszkania musi miec min. 5 znakow </br>",
+    oW: "</br>Id Osoby wynajmującej musi miec min. 5 znakow </br>",
     pR: "</br>Data początku rezerwacji musi być w formacie dd/mm/yyyy </br>",
     kR: "</br>Data końca rezerwacji musi być w formacie dd/mm/yyyy </br>",
     sR: "</br>Szczegóły rezerwacji nie mogą by dłuższe niż 100 znaków oraz zawierać znaków specjalnych",
@@ -49,14 +49,37 @@ var errorMessages = {
     dWZ: "</br>Data końca zameldowania nie może być wcześniejsza niż data poczatku zameldowania </br>",
 }
 
+function submitData(e) {
+  e.preventDefault();
+  if(validateForm()) {
+
+    const body = {
+      houseId: fieldmM.value,
+      rentingPersonId: fieldoW.value,
+      reservationStart: fieldpR.value,
+      reservationEnd: fieldkR.value,
+      details: fieldsR.value,
+      startOfAccomodation: fielddZ.value,
+      endOfAccomodation: fielddW.value
+    };
+
+    fetch(`http://localhost:5000/api/reservation`, {
+      method: 'PUT',
+      body: JSON.stringify(body),
+      headers : {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(res => alert(`Pomyslnie utworzono rezerwacje`));
+  }
+}
 
 
 function validateForm() {
     let messages = [];
     let valid = true;
 
-    const regmM = /^[0-9 ]{1,3}$/g;
-    if (!regmM.test(fieldmM.value.trim())) {
+    if (fieldmM.value.length < 5) {
         messages.push(errorMessages['mM']);
         errorsmM.innerHTML = errorMessages['mM']
         document.getElementById("mM").style.backgroundColor = 'red';
@@ -65,8 +88,7 @@ function validateForm() {
         errorsmM.innerHTML = "";
     }
 
-    const regoW = /^[0-9 ]{1,}$/g;
-    if (!regoW.test(fieldoW.value.trim())) {
+    if (fieldoW.value.length < 5) {
         messages.push(errorMessages['oW']);
         errorsoW.innerHTML = errorMessages['oW']
         document.getElementById("oW").style.backgroundColor = 'red';
@@ -125,11 +147,11 @@ function validateForm() {
         errorsdW.innerHTML = "";
     }
 
-    
+
 
     var datapR = fieldpR.value;
     var dataSeperateValues1 = datapR.split("/");
-    
+
     var day1 = dataSeperateValues1[0];
     var month1 = dataSeperateValues1[1];
     var year1 = dataSeperateValues1[2];
@@ -149,7 +171,7 @@ function validateForm() {
 
     var datakR = fieldkR.value;
     var dataSeperateValues2 = datakR.split("/");
-    
+
     var day2 = dataSeperateValues2[0];
     var month2 = dataSeperateValues2[1];
     var year2 = dataSeperateValues2[2];
@@ -173,14 +195,14 @@ function validateForm() {
         messages.push(errorMessages['pkR']);
         errorskR.innerHTML = errorMessages['pkR']
         errorspR.innerHTML = errorMessages['pkR']
-        
+
 
     }
 
 
     var datadZ = fielddZ.value;
     var dataSeperateValues3 = datadZ.split("/");
-    
+
     var day3 = dataSeperateValues3[0];
     var month3 = dataSeperateValues3[1];
     var year3 = dataSeperateValues3[2];
@@ -197,7 +219,7 @@ function validateForm() {
 
     var datadW = fielddW.value;
     var dataSeperateValues4 = datadW.split("/");
-    
+
     var day4 = dataSeperateValues4[0];
     var month4 = dataSeperateValues4[1];
     var year4 = dataSeperateValues4[2];
@@ -221,7 +243,7 @@ function validateForm() {
         messages.push(errorMessages['dWZ']);
         errorsdW.innerHTML = errorMessages['dWZ']
         errorsdZ.innerHTML = errorMessages['dWZ']
-        
+
 
     }
 
@@ -237,21 +259,9 @@ if(valid)
 {
     alert("Wysłano !");
 //    window.open("zalogowano.html");
-    
+
 
 }
 
 return valid;
 }
-
-
-
-
-
-
-
-
-
-
-
-

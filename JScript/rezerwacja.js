@@ -32,7 +32,7 @@ class ReservationData {
   insertData = (data) => {
     const contener = document.getElementsByClassName('contener')[0];
     const innerHTML = data.map((reservation) => this.getMarkup(reservation))
-    .join();
+    .join("");
     contener.innerHTML = innerHTML;
   }
 
