@@ -24,7 +24,12 @@ const errorsOP = document.getElementById('errors_OP')
 
 const errorsSummary = document.getElementById('errors_summary')
 
-
+console.log(fieldiL.value)
+console.log(fieldiS.value)
+console.log(fieldiP.value)
+console.log(fieldPi.value)
+console.log(fieldData.value)
+console.log(fieldOP.value)
 function submitData(e) {
   e.preventDefault();
   validateForm();
@@ -37,6 +42,14 @@ function submitData(e) {
   //   dateOfRegistration: String,
   //   description: String
   // }
+
+  console.log(fieldiL.value)
+  console.log(fieldiS.value)
+  console.log(fieldiP.value)
+  console.log(fieldPi.value)
+  console.log(fieldData.value)
+  console.log(fieldOP.value)
+
   const body = {}
 
   fetch(`http://localhost:5000/api/house`, {
