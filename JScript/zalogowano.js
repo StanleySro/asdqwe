@@ -27,7 +27,7 @@ class TableData {
   }
 
   fetchData = (callback) => {
-    return fetch(`http://localhost:5000/api/${this.endpoint}`, { method: 'get' })
+    return fetch(`http://localhost:5000/api/${this.endpoint}`)
     .then(
       function(response) {
         if (response.status !== 200) {
