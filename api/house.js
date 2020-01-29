@@ -1,4 +1,5 @@
 const House = require("../models/House");
+const Reservation = require("../models/Reservation");
 
 function put (req, res) {
   const { nOfBathrooms, nOfBedrooms, nOfRooms, floor, dateOfRegistration, description} = req.body;
@@ -24,7 +25,14 @@ function post (req, res) {
 }
 
 function del (req, res) {
-  House.findByIdAndDelete({ _id: req.query.id }).then(result => res.status(200).json(result));
+  House.findByIdAndDelete({ _id: req.query.id }).then(result => {
+    Reservation.find({ houseId: req.query.id }).then(reservations => {
+      Reservation.findOneAndDelete({ _id: reservations[0]._id }).then(() => {
+           res.status(200).json(result)
+      });
+    });
+  });
 }
+
 
 module.exports = { put, get, post, del };

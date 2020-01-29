@@ -108,7 +108,7 @@ function validateForm() {
     }
 
     const regPesel = /[1-9]{9}/;
-    if (!regPesel.test(fieldPesel.value.trim())) {
+    if (false && !regPesel.test(fieldPesel.value.trim())) {
         messages.push(errorMessages['pesel']);
         errorsPesel.innerHTML = errorMessages['pesel']
         document.getElementById("pesel").style.backgroundColor = 'red';

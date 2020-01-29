@@ -47,18 +47,58 @@ function mod(btn, endpoint) {
 }
 
 class TableData {
-  constructor(endpoint, keys) {
+  constructor(endpoint, keys, selects) {
     this.endpoint = endpoint;
     this.keys = keys;
-    this.fetchData((data) => this.insertData(data));
+    this.selects = selects;
+    this.selectsData = {};
+    this.data = {};
+
+    if (this.selects) {
+      Object.keys(this.selects).forEach((key, i) => {
+        if (typeof this.selects[key] === 'function') {
+          this.selects[key](res => {
+          this.selectsData[key] = res;
+            if (Object.keys(this.selectsData).length === Object.keys(this.selects).length) {
+              this.fetchData((data) => {
+                this.data = data;
+                this.insertData(data)
+              });
+            }
+          });
+        }
+      });
+    } else {
+      this.fetchData((data) => {
+        this.data = data;
+        this.insertData(data);
+      });
+    }
   }
 
+  getData = () => this.data;
+
   getInputMarkup = (key, value, disabled=false) => {
+    if (this.selects && Object.keys(this.selects).includes(key)) {
+      return `<select value="${value}" style="width: 100%;" data-key="${key}" ${disabled ? 'disabled="true"' : ""}>`+
+      this.selectsData[key].map(value => `<option value=${value._id}>${key === 'rentingPersonId' ? `${value.firstName} ${value.secondName}` : value._id}</option>`).join('\n')
+      +
+      `</select>`;
+    }
+    if (Array.isArray(value)) {
+      return `<select value="${value[0]}" style="width: 100%;" data-key="${key}">`+
+      value.map((val, i) => `<option value=${val}>${val}</option>`).join('\n')
+      +
+      `</select>`;
+    }
     return `<input style="width: 100%;" data-key="${key}" type="text" value="${value}" ${disabled ? 'disabled="true"' : ""}></input>`;
   }
 
   insertData = (data) => {
     const table = document.getElementById(`${this.endpoint}-table`);
+    if (!table) {
+      return null;
+    }
     data.forEach((key, i) => {
       const row = table.insertRow(i + 1);
       this.keys.forEach((key, j) => {
@@ -105,7 +145,8 @@ const UserData = new TableData('user', [
   'secondName',
   'dateOfBirth',
   'pesel',
-  'nationality'
+  'nationality',
+   'reservations'
 ]);
 // UserData.fetchData((data) => console.log(data))
 const HouseData = new TableData('house', [
@@ -117,6 +158,7 @@ const HouseData = new TableData('house', [
   'dateOfRegistration',
   'description'
 ]);
+
 const ReservationData = new TableData('reservation', [
   '_id',
   'houseId',
@@ -126,4 +168,4 @@ const ReservationData = new TableData('reservation', [
   'details',
   'startOfAccomodation',
   'endOfAccomodation'
-]);
+], { 'rentingPersonId': UserData.fetchData, 'houseId': HouseData.fetchData });

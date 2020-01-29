@@ -10,7 +10,7 @@ const fielDetails = document.getElementById('sr')
 function redirectToStaly(e) {
   e.preventDefault();
   const houseId = getQueryVariable('houseId');
-  window.location.replace(`stalyKlientPesel.html?houseId=${houseId}`);
+  window.location.replace(`ZmodyfikujT3.html?houseId=${houseId}`);
 
 }
 

@@ -36,7 +36,22 @@ function post(req, res) {
 }
 
 function del(req, res) {
-  Reservation.findByIdAndDelete({ _id: req.query.id }).then(result => res.status(200).json(result));
+  let errors = {};
+  Reservation.findById(req.query.id).then(reservation => {
+      Reservation.findByIdAndDelete({ _id: req.query.id }).then(result => {
+        User.findByIdAndUpdate(reservation.rentingPersonId,
+          { $pull: { reservations: reservation._id } }, userError => {
+            if (userError) {
+              console.error(userError);
+              errors.user = "couldn't update user reservation";
+              res.status(404).json({ errors });
+            }
+            res.status(200).json(result);
+        });
+      });
+  });
+
+
 }
 
 module.exports = { put, get, post, del };

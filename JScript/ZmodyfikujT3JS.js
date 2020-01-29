@@ -2,12 +2,36 @@ const form = document.getElementById('form')
 
 var dataNow = new Date();
 
+function getQueryVariable(variable) {
+    var query = window.location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split('=');
+        if (decodeURIComponent(pair[0]) == variable) {
+            return decodeURIComponent(pair[1]);
+        }
+    }
+}
 
 const fieldmM = document.getElementById('mM')
 const errorsmM = document.getElementById('errors_mM')
 
+    fetch(`http://localhost:5000/api/house`)
+    .then(res => res.json())
+    .then(houses => {
+      fieldmM.innerHTML = houses.map(house => `<option value=${house._id}>${house._id}</option>`).join("");
+      fieldmM.value = getQueryVariable('houseId') || houses[0]._id;
+    });
+
 const fieldoW = document.getElementById('oW')
 const errorsoW = document.getElementById('errors_oW')
+
+    fetch(`http://localhost:5000/api/user`)
+    .then(res => res.json())
+    .then(users => {
+      fieldoW.innerHTML = users.map(user => `<option value=${user._id}>${user.firstName} ${user.secondName}</option>`).join("");
+      fieldoW.value = users[0]._id;
+    });
 
 const fieldpR = document.getElementById('pR')
 const errorspR = document.getElementById('errors_pR')

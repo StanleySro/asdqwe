@@ -1,15 +1,26 @@
 const form = document.getElementById('form1')
+const errorMessages = {
+    pesel: "</br>Pesel musi składać się z samych cyfr w liczbie 9 </br>",
+    pesel1: "</br>Wpisany pesel nie pokrywa się z żadnym znajdującym sie z naszej bazie danych </br>",
+    pR: "</br>Data początku rezerwacji musi być w formacie dd/mm/yyyy </br>",
+    kR: "</br>Data końca rezerwacji musi być w formacie dd/mm/yyyy </br>",
+
+    pR1: "</br>Data początku rezerwacji nie może zostać wykonana przed dniem dzisiejszym </br>",
+    kR1: "</br>Data końca rezerwacji nie może zostać wykonana przed dniem dzisiejszym </br>",
+    pkR: "</br>Data końca rezerwacji nie może być wcześniejsza niż data poczatku rezerwacji </br>"
+}
 
 var dataNow = new Date();
 
-const fieldPesel = document.getElementById('pesel')
-const errorsPesel = document.getElementById('errors_pesel')
+fetch(`http://localhost:5000/api/user`).then(res => res.json()).then(users => {
 
-const fieldpR = document.getElementById('pR')
-const errorspR = document.getElementById('errors_pR')
+document.getElementById('pesel').innerHTML = users.map(user => `<option value=${user.pesel}>${user.firstName} ${user.secondName}</option>`).join('\n');
 
-const fieldkR = document.getElementById('kR')
-const errorskR = document.getElementById('errors_kR')
+});
+
+
+
+
 
 function getQueryVariable(variable) {
     var query = window.location.search.substring(1);
@@ -25,11 +36,25 @@ function getQueryVariable(variable) {
 
 
 function submitData(e) {
+
+const fieldPesel = document.getElementById('pesel')
+const errorsPesel = document.getElementById('errors_pesel')
+
+const fieldpR = document.getElementById('pR')
+const errorspR = document.getElementById('errors_pR')
+
+const fieldkR = document.getElementById('kR')
+const errorskR = document.getElementById('errors_kR')
+
   e.preventDefault();
   if (validateForm()) {
     fetch(`http://localhost:5000/api/user?pesel=${fieldPesel.value}`)
     .then(res => res.json())
     .then(user => {
+      if (user.error) {
+        alert('nie ma takiego peselu w bazie')
+        return;
+      }
       const { _id } = user;
       const houseId = getQueryVariable('houseId');
       const body = {
@@ -38,6 +63,7 @@ function submitData(e) {
         reservationStart: fieldpR.value,
         reservationEnd: fieldkR.value
       };
+      console.log(body)
 
       fetch(`http://localhost:5000/api/reservation`, {
         method: 'PUT',
@@ -62,16 +88,7 @@ function submitData(e) {
 }
 
 
-var errorMessages = {
-    pesel: "</br>Pesel musi składać się z samych cyfr w liczbie 9 </br>",
-    pesel1: "</br>Wpisany pesel nie pokrywa się z żadnym znajdującym sie z naszej bazie danych </br>",
-    pR: "</br>Data początku rezerwacji musi być w formacie dd/mm/yyyy </br>",
-    kR: "</br>Data końca rezerwacji musi być w formacie dd/mm/yyyy </br>",
 
-    pR1: "</br>Data początku rezerwacji nie może zostać wykonana przed dniem dzisiejszym </br>",
-    kR1: "</br>Data końca rezerwacji nie może zostać wykonana przed dniem dzisiejszym </br>",
-    pkR: "</br>Data końca rezerwacji nie może być wcześniejsza niż data poczatku rezerwacji </br>"
-}
 
 
 
@@ -79,10 +96,18 @@ function validateForm() {
     let messages = [];
     let valid = true;
 
+const fieldPesel = document.getElementById('pesel')
+const errorsPesel = document.getElementById('errors_pesel')
+
+const fieldpR = document.getElementById('pR')
+const errorspR = document.getElementById('errors_pR')
+
+const fieldkR = document.getElementById('kR')
+const errorskR = document.getElementById('errors_kR')
 
 
     const regPesel = /[1-9]{9}/;
-    if (!regPesel.test(fieldPesel.value.trim())) {
+    if (false && !regPesel.test(fieldPesel.value.trim())) {
         messages.push(errorMessages['pesel']);
         errorsPesel.innerHTML = errorMessages['pesel']
         document.getElementById("pesel").style.backgroundColor = 'red';

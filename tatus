@@ -1,0 +1,101 @@
+[33mcommit fd12033794f2de5bbd20ea1229ed7948c4a3546d[m
+Author: idoe <idoe@localhost.localdomain>
+Date:   Tue Jan 21 21:56:27 2020 +0100
+
+    feature: zarezerwuj & staly klient pages
+
+[33mcommit c8ed7d75396bbe1764d4c76414feb34664df3bde[m
+Author: idoe <idoe@localhost.localdomain>
+Date:   Tue Jan 21 21:11:02 2020 +0100
+
+    feature: rezerwacja.html insert data
+
+[33mcommit 9a64ec9f58e61b368bd96c3023f6051a8ea34d08[m
+Author: idoe <idoe@localhost.localdomain>
+Date:   Tue Jan 21 04:28:47 2020 +0100
+
+    step: ZmodyfikujT2JS.js
+
+[33mcommit cf307e2c433084ba3d7163788ef0412dabba5add[m
+Author: idoe <idoe@localhost.localdomain>
+Date:   Tue Jan 21 04:21:26 2020 +0100
+
+    feature: dodajNowyRekordT1.html
+
+[33mcommit 62176f1b38ffe91cde67154b1488da6da70d703c[m
+Author: idoe <idoe@localhost.localdomain>
+Date:   Tue Jan 21 03:54:53 2020 +0100
+
+    feature: rezerwacja.html
+
+[33mcommit b8435e05ecb4710034e009bbe1bb68fa94b5bc3b[m
+Author: idoe <idoe@localhost.localdomain>
+Date:   Tue Jan 21 03:30:50 2020 +0100
+
+    feature: working all apis + zalogowano refactor
+
+[33mcommit f9f0190dd21d05ae3904b170749bd756d0b63cc5[m
+Author: idoe <idoe@localhost.localdomain>
+Date:   Tue Jan 21 02:51:48 2020 +0100
+
+    feature: edit user
+
+[33mcommit f86fe7960b054d99701333c63e182993845e0663[m
+Author: idoe <idoe@localhost.localdomain>
+Date:   Tue Jan 21 02:16:39 2020 +0100
+
+    feature: edit user
+
+[33mcommit 07f52bdf8bde3203c9285db0c14261b6b3994ba8[m
+Author: idoe <idoe@localhost.localdomain>
+Date:   Tue Jan 21 00:13:59 2020 +0100
+
+    feature: working api
+
+[33mcommit e26560d57a065390a802ef6f308ea9a31958d6ed[m
+Author: Demoxar <stasiu_sroczynski@tlen.pl>
+Date:   Mon Jan 20 23:47:18 2020 +0100
+
+    Add files via upload
+
+[33mcommit 9c2aa9ad5dab26b212d3508ea983a3badb98c573[m
+Author: Demoxar <stasiu_sroczynski@tlen.pl>
+Date:   Mon Jan 20 23:05:47 2020 +0100
+
+    Add files via upload
+
+[33mcommit 73a2ddce83082bde23925d000bfb08d6414d96b0[m
+Author: idoe <idoe@localhost.localdomain>
+Date:   Mon Jan 20 02:22:35 2020 +0100
+
+    feature: fetch data from back-end
+
+[33mcommit d684387c30e383ab1fb24e0c22425c252e1d005b[m
+Author: idoe <idoe@localhost.localdomain>
+Date:   Mon Jan 20 02:07:06 2020 +0100
+
+    feature: user api
+
+[33mcommit 8f901ce2dcc81682a70a99bbed9c58581982cde9[m
+Author: idoe <idoe@localhost.localdomain>
+Date:   Mon Jan 20 01:43:27 2020 +0100
+
+    rm node_modules
+
+[33mcommit c830519c588d4f0f713ee3a7a3ddfbe105929c70[m
+Author: idoe <idoe@localhost.localdomain>
+Date:   Mon Jan 20 01:41:49 2020 +0100
+
+    feature: mongoose connection
+
+[33mcommit e80e88368ea7d7f05bce5c7508b1ac53d40c6b99[m
+Author: idoe <idoe@localhost.localdomain>
+Date:   Mon Jan 20 01:41:07 2020 +0100
+
+    feature: mongoose connection
+
+[33mcommit 6b491be781eda4b240a1059890dd5e77fd80247e[m
+Author: Demoxar <stasiu_sroczynski@tlen.pl>
+Date:   Sun Jan 19 22:56:02 2020 +0100
+
+    Add files via upload

@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const Reservation = require("../models/Reservation");
 
 function put (req, res) {
   const { firstName, secondName, dateOfBirth, surname, pesel, reservations, nationality } = req.body;
@@ -14,6 +15,9 @@ function get (req, res) {
     });
   } else if (pesel) {
     User.find({ pesel }).then((users) => {
+      if (!users[0]) {
+        res.status(404).json({ error: 'no such pesel' })
+      }
       res.status(200).json(users[0]);
     });
   } else {
@@ -28,7 +32,13 @@ function post (req, res) {
 }
 
 function del (req, res) {
-  User.findByIdAndDelete({ _id: req.query.id }).then(result => res.status(200).json(result));
+  User.findByIdAndDelete({ _id: req.query.id }).then(result => {
+    Reservation.find({ rentingPersonId: req.query.id }).then(reservations => {
+      Reservation.findOneAndDelete({ _id: reservations[0]._id }).then(() => {
+           res.status(200).json(result)
+      });
+    });
+  });
 }
 
 module.exports = { put, get, post, del };
