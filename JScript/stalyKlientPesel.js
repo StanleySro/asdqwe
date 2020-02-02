@@ -36,6 +36,7 @@ function getQueryVariable(variable) {
 
 
 function submitData(e) {
+  e.preventDefault();
 
 const fieldPesel = document.getElementById('pesel')
 const errorsPesel = document.getElementById('errors_pesel')
@@ -46,7 +47,6 @@ const errorspR = document.getElementById('errors_pR')
 const fieldkR = document.getElementById('kR')
 const errorskR = document.getElementById('errors_kR')
 
-  e.preventDefault();
   if (validateForm()) {
     fetch(`http://localhost:5000/api/user?pesel=${fieldPesel.value}`)
     .then(res => res.json())

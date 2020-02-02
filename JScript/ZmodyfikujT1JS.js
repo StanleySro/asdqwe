@@ -37,7 +37,9 @@ function submitData(e) {
         'Content-Type': 'application/json'
       }
     })
-    .then(res => alert(`Pomyslnie utworzono urzytkownika`));
+    .then(res => {
+      alert(`Pomyslnie utworzono urzytkownika`)
+      });
   }
 }
 
