@@ -37,8 +37,14 @@ function submitData(e) {
         'Content-Type': 'application/json'
       }
     })
+    .then(res => res.json())
     .then(res => {
-      alert(`Pomyslnie utworzono urzytkownika`)
+      if (res.error) {
+        alert(`Blad`)
+        console.error(res.error);
+      } else {
+        alert(`Pomyslnie utworzono urzytkownika`)
+      }
       });
   }
 }
