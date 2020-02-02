@@ -35,7 +35,12 @@ function mod(btn, endpoint) {
     const key = getInputKey(innerHTML);
     body[key] = value;
   }
-
+  if (endpoint === 'user') {
+    const ommitProps = ['reservations'];
+    ommitProps.forEach(prop => {
+      delete body[prop];
+    });
+  }
   fetch(`http://localhost:5000/api/${endpoint}?id=${_id}`, {
     method: 'POST',
     body: JSON.stringify(body),
@@ -47,10 +52,11 @@ function mod(btn, endpoint) {
 }
 
 class TableData {
-  constructor(endpoint, keys, selects) {
+  constructor(endpoint, keys, selects, options={}) {
     this.endpoint = endpoint;
     this.keys = keys;
     this.selects = selects;
+    this.options = options;
     this.selectsData = {};
     this.data = {};
 
