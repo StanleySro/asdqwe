@@ -69,6 +69,7 @@ class TableData {
               this.fetchData((data) => {
                 this.data = data;
                 this.insertData(data)
+                // this.setValues(data);
               });
             }
           });
@@ -78,22 +79,27 @@ class TableData {
       this.fetchData((data) => {
         this.data = data;
         this.insertData(data);
+        // this.setValues(data);
       });
     }
   }
 
   getData = () => this.data;
 
-  getInputMarkup = (key, value, disabled=false) => {
+  getInputMarkup = (key, value, disabled=false, data) => {
     if (this.selects && Object.keys(this.selects).includes(key)) {
       return `<select value="${value}" style="width: 100%;" data-key="${key}" ${disabled ? 'disabled="true"' : ""}>`+
-      this.selectsData[key].map(value => `<option value=${value._id}>${key === 'rentingPersonId' ? `${value.firstName} ${value.secondName}` : value._id}</option>`).join('\n')
+      this.selectsData[key].map(val => {
+        return `<option ${value === val._id ? 'selected' : ''} value=${val._id}>${key === 'rentingPersonId' ? `${val.firstName} ${val.secondName}` : val._id}</option>`;
+      }).join('\n')
       +
       `</select>`;
     }
     if (Array.isArray(value)) {
-      return `<select value="${value[0]}" style="width: 100%;" data-key="${key}">`+
-      value.map((val, i) => `<option value=${val}>${val}</option>`).join('\n')
+      return `<select key="${this.endpoint+key}" value="${value[0]}" style="width: 100%;" data-key="${key}">`+
+      value.map((val, i) => {
+        return `<option value=${val}>${val}</option>`;
+      }).join('\n')
       +
       `</select>`;
     }
@@ -109,16 +115,30 @@ class TableData {
       const row = table.insertRow(i + 1);
       this.keys.forEach((key, j) => {
         const cell = row.insertCell(j);
+        const value =  data[i][key];
         cell.innerHTML = this.getInputMarkup(
-          key, data[i][key], j === 0
+          key, value, j === 0
         );
       });
+
       const deleteBtnCell = row.insertCell(this.keys.length);
       const modifyBtnCell = row.insertCell(this.keys.length + 1);
       deleteBtnCell.innerHTML = `<button class="u" id="usunButton3" data-_id=${data[i]['_id']} data-index=${i} onclick="del(this,'${this.endpoint}')">-</button>`;
       modifyBtnCell.innerHTML = `<button class="zm" id="zBM1" data-_id=${data[i]['_id']} data-index=${i} onclick="mod(this,'${this.endpoint}')">?</button>`;
     });
   }
+
+//  DEPRECEATED
+//  setValues = (data) => {
+//    this.data.forEach(entity => {
+//      if (this.options.setDropdownValues) {
+//        this.options.setDropdownValues.forEach(option => {
+//          console.log('setting value for option ', '\n', option, '\n', this.endpoint+option, '\n', entity[option] )
+//          document.getElementById(this.endpoint+option).value = data[option];
+//        });
+//      }
+//    });
+//  }
 
   fetchData = (callback) => {
     return fetch(`http://localhost:5000/api/${this.endpoint}`)
@@ -174,4 +194,9 @@ const ReservationData = new TableData('reservation', [
   'details',
   'startOfAccomodation',
   'endOfAccomodation'
-], { 'rentingPersonId': UserData.fetchData, 'houseId': HouseData.fetchData });
+], {
+  'rentingPersonId': UserData.fetchData, 'houseId': HouseData.fetchData
+},
+/*{
+  setDropdownValues: ['houseId', 'rentingPersonId']
+}*/);
