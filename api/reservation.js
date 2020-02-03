@@ -6,8 +6,8 @@ function put(req, res) {
   const newReservation = new Reservation(req.body);
   newReservation.save().then(reservation => {
     //res.status(200).json(reservation);
-    User.findByIdAndUpdate(rentingPersonId,
-      { $push: { reservations: reservation._id } }, userError => {
+    User.$(rentingPersonId,
+      { $addToSet: { reservations: reservation._id } }, userError => {
         if (userError) {
           console.error(userError);
           errors.user = "couldn't update user reservation";
