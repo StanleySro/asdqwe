@@ -36,7 +36,7 @@ function submitData(e) {
       description: fieldOP.value
     };
 
-    fetch(`http://localhost:5000/api/house`, {
+    fetch(`http://localhost:5001/api/house`, {
       method: 'PUT',
       body: JSON.stringify(body),
       headers : {

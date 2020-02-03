@@ -12,7 +12,7 @@ const errorMessages = {
 
 var dataNow = new Date();
 
-fetch(`http://localhost:5000/api/user`).then(res => res.json()).then(users => {
+fetch(`http://localhost:5001/api/user`).then(res => res.json()).then(users => {
 
 document.getElementById('pesel').innerHTML = users.map(user => `<option value=${user.pesel}>${user.firstName} ${user.secondName}</option>`).join('\n');
 
@@ -48,7 +48,7 @@ const fieldkR = document.getElementById('kR')
 const errorskR = document.getElementById('errors_kR')
 
   if (validateForm()) {
-    fetch(`http://localhost:5000/api/user?pesel=${fieldPesel.value}`)
+    fetch(`http://localhost:5001/api/user?pesel=${fieldPesel.value}`)
     .then(res => res.json())
     .then(user => {
       if (user.error) {
@@ -65,7 +65,7 @@ const errorskR = document.getElementById('errors_kR')
       };
       console.log(body)
 
-      fetch(`http://localhost:5000/api/reservation`, {
+      fetch(`http://localhost:5001/api/reservation`, {
         method: 'PUT',
         body: JSON.stringify(body),
         headers : {

@@ -30,7 +30,7 @@ function submitData(e) {
       nationality,
     }
 
-    fetch(`http://localhost:5000/api/user`, {
+    fetch(`http://localhost:5001/api/user`, {
       method: 'PUT',
       body: JSON.stringify(body),
       headers : {

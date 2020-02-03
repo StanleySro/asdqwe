@@ -16,7 +16,7 @@ function getQueryVariable(variable) {
 const fieldmM = document.getElementById('mM')
 const errorsmM = document.getElementById('errors_mM')
 
-    fetch(`http://localhost:5000/api/house`)
+    fetch(`http://localhost:5001/api/house`)
     .then(res => res.json())
     .then(houses => {
       fieldmM.innerHTML = houses.map(house => `<option value=${house._id}>${house._id}</option>`).join("");
@@ -26,7 +26,7 @@ const errorsmM = document.getElementById('errors_mM')
 const fieldoW = document.getElementById('oW')
 const errorsoW = document.getElementById('errors_oW')
 
-    fetch(`http://localhost:5000/api/user`)
+    fetch(`http://localhost:5001/api/user`)
     .then(res => res.json())
     .then(users => {
       fieldoW.innerHTML = users.map(user => `<option value=${user._id}>${user.firstName} ${user.secondName}</option>`).join("");
@@ -87,7 +87,7 @@ function submitData(e) {
       endOfAccomodation: fielddW.value
     };
 
-    fetch(`http://localhost:5000/api/reservation`, {
+    fetch(`http://localhost:5001/api/reservation`, {
       method: 'PUT',
       body: JSON.stringify(body),
       headers : {

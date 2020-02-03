@@ -35,7 +35,7 @@ function submitData(e) {
       pesel: fieldPesel.value,
       nationality: fieldNationality.value,
     }
-    fetch(`http://localhost:5000/api/user`, {
+    fetch(`http://localhost:5001/api/user`, {
       method: 'PUT',
       body: JSON.stringify(body),
       headers : {
@@ -54,7 +54,7 @@ function submitData(e) {
         details: fielDetails.value,
       };
 
-      fetch(`http://localhost:5000/api/reservation`, {
+      fetch(`http://localhost:5001/api/reservation`, {
         method: 'PUT',
         body: JSON.stringify(body),
         headers : {

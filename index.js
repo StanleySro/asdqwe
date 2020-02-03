@@ -7,6 +7,7 @@ const cors = require('cors');
 const userApi = require("./api/user");
 const houseApi = require("./api/house");
 const reservationApi = require("./api/reservation");
+const path = require("path");
 
 const app = express();
 const api = express.Router();
@@ -43,6 +44,8 @@ api.put('/reservation', reservationApi.put);
 api.delete('/reservation', reservationApi.del);
 
 app.use("/api", api);
+
+app.use(express.static(process.cwd()));
 
 const PORT = process.env.PORT;
 

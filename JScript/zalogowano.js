@@ -1,6 +1,6 @@
 function del(btn, endpoint) {
   const { _id } = btn.dataset;
-  fetch(`http://localhost:5000/api/${endpoint}?id=${_id}`, { method: 'DELETE' })
+  fetch(`http://localhost:5001/api/${endpoint}?id=${_id}`, { method: 'DELETE' })
   .then(res => window.location.reload());
 }
 
@@ -41,7 +41,7 @@ function mod(btn, endpoint) {
       delete body[prop];
     });
   }
-  fetch(`http://localhost:5000/api/${endpoint}?id=${_id}`, {
+  fetch(`http://localhost:5001/api/${endpoint}?id=${_id}`, {
     method: 'POST',
     body: JSON.stringify(body),
     headers : {
@@ -141,7 +141,7 @@ class TableData {
 //  }
 
   fetchData = (callback) => {
-    return fetch(`http://localhost:5000/api/${this.endpoint}`)
+    return fetch(`http://localhost:5001/api/${this.endpoint}`)
     .then(
       function(response) {
         if (response.status !== 200) {

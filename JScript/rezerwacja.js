@@ -37,7 +37,7 @@ class ReservationData {
   }
 
   fetchData = (callback) => {
-    return fetch(`http://localhost:5000/api/house`)
+    return fetch(`http://localhost:5001/api/house`)
     .then(
       function(response) {
         if (response.status !== 200) {
